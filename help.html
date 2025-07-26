@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Help & Support | FEU Tech Campus Navigation</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .faq-answer {
+      display: none;
+      padding: 10px 15px;
+      background-color: #f5f5f5;
+      border-left: 3px solid #007bff;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    .faq-question {
+      cursor: pointer;
+      font-weight: 500;
+      padding: 10px 15px;
+      background-color: #eee;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+    .faq-question i {
+      transition: transform 0.3s ease;
+    }
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .user-profile {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      /* Removed display: none; */
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      min-width: 250px;
+      z-index: 1000;
+      margin-top: 10px;
+      opacity: 0;
+      visibility: hidden; /* Controls visibility without removing from flow instantly */
+      transform: translateY(-10px);
+      /* Adjusted transition for visibility */
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+    }
+
+    .user-profile.active .dropdown-menu {
+      /* Removed display: block; */
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      /* Adjusted transition for visibility (instant on show) */
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
+    }
+
+    .dropdown-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .user-profile.active .dropdown-icon {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu .user-info {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .dropdown-menu .user-initials {
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .dropdown-menu .user-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dropdown-menu .user-name-dropdown {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .dropdown-menu .user-email-dropdown {
+      font-size: 0.85em;
+      color: #777;
+    }
+
+    .dropdown-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .dropdown-menu ul li a {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .dropdown-menu ul li a:hover {
+      background-color: #f5f5f5;
+    }
+
+    .dropdown-menu ul li a i {
+      margin-right: 10px;
+      color: #555;
+    }
+
+    .dropdown-menu ul li .badge {
+      background-color: #ff4d4f;
+      color: #fff;
+      font-size: 0.75em;
+      padding: 2px 6px;
+      border-radius: 12px;
+      margin-left: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-sketch icon'></i>
+      <div class="logo_name">FEU Tech</div>
+      <i class='bx bx-menu-alt-right' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+      <li><a href="dashboard.html"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
+      <li><a href="guidemap.html"><i class='bx bx-map-alt'></i><span class="links_name">Guide Map</span></a></li>
+      <li><a href="account.html"><i class='bx bx-user'></i><span class="links_name">Account</span></a></li>
+      <li><a href="feedback.html"><i class='bx bx-chat'></i><span class="links_name">Feedback</span></a></li>
+      <li><a href="about.html"><i class='bx bx-info-circle'></i><span class="links_name">About Us</span></a></li>
+      <li><a href="help.html" class="active"><i class='bx bx-help-circle'></i><span class="links_name">Help</span></a></li>
+      <li class="profile">
+      </li>
+    </ul>
+  </div>
+
+  <section class="home-section">
+    <header class="main-header">
+      <div class="header-content">
+        <div class="title-and-logo">
+          <img src="images/logo.png" alt="FEU Tech Logo" class="header-logo">
+          <h2 class="page-title">Help & Support</h2>
+        </div>
+        <div class="user-profile">
+          <a href="#" class="profile-link">
+            <img src="images/profile.jpg" alt="User Avatar" class="user-avatar">
+            <span class="user-name">Jane Doe</span>
+            <i class='bx bx-chevron-down dropdown-icon'></i>
+          </a>
+          <div class="dropdown-menu">
+            <div class="user-info">
+              <span class="user-initials">JD</span>
+              <div class="user-details">
+                <div class="user-name-dropdown">Jane Doe</div>
+                <div class="user-email-dropdown">jane.doe@example.com</div>
+              </div>
+            </div>
+            <ul>
+              <li><a href="account.html"><i class='bx bx-user'></i>My Profile</a></li>
+              <li><a href="settings.html"><i class='bx bx-cog'></i>Settings</a></li>
+              <li><a href="notifications.html"><i class='bx bx-bell'></i>Notifications <span class="badge">3</span></a></li>
+              <li><a href="login.html" class="logout"><i class='bx bx-log-out'></i>Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="help-container">
+      <div class="help-header">
+        <h3>How Can We Help You Today?</h3>
+        <p>Find answers to common questions or contact our support team.</p>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for help topics...">
+        </div>
+      </div>
+
+      <div class="faq-section">
+        <h4>Frequently Asked Questions</h4>
+
+        <div class="faq-item">
+          <div class="faq-question">How do I find a specific room? <i class='bx bx-chevron-down'></i></div>
+          <div class="faq-answer">Navigate to the "Guide Map" page. You can select the floor you wish to view, then click on room labels to see more details. A search function is coming soon!</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Is the map available for all buildings? <i class='bx bx-chevron-down'></i></div>
+          <div class="faq-answer">Currently, the interactive map covers C and D Buildings. Additional buildings will be added in future updates.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Can I report an issue with the map? <i class='bx bx-chevron-down'></i></div>
+          <div class="faq-answer">Yes! Please go to the "Feedback" page and submit a report. Your input helps us improve.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">How do I change my profile information? <i class='bx bx-chevron-down'></i></div>
+          <div class="faq-answer">Visit the "Account" page and click "Edit Profile" to update your personal information.</div>
+        </div>
+      </div>
+
+      <div class="contact-support-section">
+        <h4>Contact Support</h4>
+        <p>If you can’t find what you’re looking for, reach out to us:</p>
+        <div class="contact-info">
+          <p><i class='bx bx-envelope'></i> support@feutechnavigation.com</p>
+          <p><i class='bx bx-phone'></i> +63 (2) 8981-2345</p>
+          <p><i class='bx bx-map-pin'></i> Registrar's Office, Main Building, FEU Tech</p>
+        </div>
+      </div>
+
+      <div class="additional-resources">
+        <h4>Additional Resources</h4>
+        <ul>
+          <li><a href="https://www.feutech.edu.ph">FEU Tech Official Website</a></li>
+          <li><a href="https://www.feu.edu.ph/wp-content/uploads/2024/11/FEU-Student-Handbook-2024.pdf">Student Handbook</a></li>
+          <li><a href="https://www.feu.edu.ph/academic-calendars/">Academic Calendar</a></li>
+          <li><a href="feedback.html">Submit Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.querySelector(".sidebar");
+    const closeBtn = document.querySelector("#btn");
+    const userProfile = document.querySelector(".user-profile");
+    const profileLink = document.querySelector(".profile-link");
+    const dropdownMenu = document.querySelector(".dropdown-menu");
+
+    if (sidebar && closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        const sidebarName = document.querySelector('.sidebar .profile .name');
+        const sidebarJob = document.querySelector('.sidebar .profile .job');
+        if (sidebarName) sidebarName.textContent = "Jane Doe";
+        if (sidebarJob) sidebarJob.textContent = "Student";
+      });
+    }
+
+    const userName = "Jane Doe";
+    const userEmail = "jane.doe@example.com";
+    const userRole = "Student";
+
+    const headerUserName = document.querySelector('.user-profile .user-name');
+    const dropdownUserName = document.querySelector('.dropdown-menu .user-name-dropdown');
+    const dropdownUserEmail = document.querySelector('.dropdown-menu .user-email-dropdown');
+    const dropdownUserInitials = document.querySelector('.dropdown-menu .user-initials');
+
+    if (headerUserName) headerUserName.textContent = userName;
+    if (dropdownUserName) dropdownUserName.textContent = userName;
+    if (dropdownUserEmail) dropdownUserEmail.textContent = userEmail;
+    if (dropdownUserInitials) dropdownUserInitials.textContent = getInitials(userName);
+
+    function getInitials(name) {
+      return name.split(' ').map(n => n[0]).join('').toUpperCase();
+    }
+
+    const logoutBtnSidebar = document.getElementById('log_out');
+    const logoutBtnDropdown = document.querySelector('.dropdown-menu .logout');
+    const performLogout = (e) => {
+      e.preventDefault();
+      alert('Logging out...');
+      window.location.href = 'login.html';
+    };
+    if (logoutBtnSidebar) logoutBtnSidebar.addEventListener('click', performLogout);
+    if (logoutBtnDropdown) logoutBtnDropdown.addEventListener('click', performLogout);
+
+    if (profileLink && dropdownMenu) {
+      profileLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        userProfile.classList.toggle('active');
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!userProfile.contains(event.target)) {
+          userProfile.classList.remove('active');
+        }
+      });
+    }
+
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+
+  });
+</script>
+
+</body>
+</html>

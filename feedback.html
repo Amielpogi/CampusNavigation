@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>User Feedback | FEU Tech Campus Navigation</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* These styles are for the user profile dropdown, copied from help.html's inline style block.
+           It's highly recommended to move these to your 'css/style.css' for consistency. */
+        .user-profile {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            min-width: 250px;
+            z-index: 1000;
+            margin-top: 10px;
+            opacity: 0;
+            visibility: hidden; /* Controls visibility without removing from flow instantly */
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+        }
+
+        .user-profile.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
+        }
+
+        .dropdown-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .user-profile.active .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu .user-info {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown-menu .user-initials {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .dropdown-menu .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dropdown-menu .user-name-dropdown {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .dropdown-menu .user-email-dropdown {
+            font-size: 0.85em;
+            color: #777;
+        }
+
+        .dropdown-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown-menu ul li a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu ul li a:hover {
+            background-color: #f5f5f5;
+        }
+
+        .dropdown-menu ul li a i {
+            margin-right: 10px;
+            color: #555;
+        }
+
+        .dropdown-menu ul li .badge {
+            background-color: #ff4d4f;
+            color: #fff;
+            font-size: 0.75em;
+            padding: 2px 6px;
+            border-radius: 12px;
+            margin-left: auto;
+        }
+
+        /* --- New/Modified Styles for Feedback Page --- */
+        .home-section {
+            padding: 20px;
+            background-color: #f8f8f8;
+            min-height: calc(100vh - 70px); /* Adjust based on header height */
+            transition: all 0.5s ease;
+        }
+
+        /* Adjust content when sidebar is open */
+        .home-section.sidebar-open-adjusted {
+            margin-left: 240px; /* Width of open sidebar */
+            width: calc(100% - 240px);
+        }
+
+        .feedback-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* RECOLOR: "We Value Your Feedback!" */
+        .feedback-header h3 {
+            color: #ffffff; /* Keep it dark as per the screenshot, or change as requested */
+            margin-bottom: 5px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        /* RECOLOR: "Help us improve by sharing your thoughts..." */
+        .feedback-header p {
+            color: #ffffff; /* Changed to a slightly lighter grey from #777 */
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.05em;
+        }
+
+        /* If you wanted a much lighter color, e.g., for a background with an image, you'd use something like:
+        .feedback-header h3 { color: #f8f8f8; }
+        .feedback-header p { color: #e0e0e0; }
+        But given the screenshot, a slightly lighter dark grey might be what you mean by "recolor" from black.
+        I've adjusted 'p' to #555. If you want 'h3' lighter, change #333 to something like #555 or #666. */
+
+
+        .feedback-form-section, .recent-feedback-section {
+            margin-bottom: 40px;
+            padding-top: 20px; /* Add some space above the section title */
+        }
+
+        .feedback-form-section h4, .recent-feedback-section h4 {
+            color: #007bff;
+            font-size: 1.4em;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center; /* Center the section titles */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+            box-sizing: border-box; /* Include padding in width */
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 100px;
+        }
+
+        .small-text {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .star-rating .star {
+            font-size: 1.8em;
+            color: #e0e0e0; /* Default star color */
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .star-rating .star.selected,
+        .star-rating .star.hovered {
+            color: #ffc107; /* Gold color for selected/hovered stars */
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .category-btn {
+            background-color: #e9ecef;
+            color: #333;
+            border: 1px solid #dee2e6;
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .category-btn:hover {
+            background-color: #d6d8db;
+        }
+
+        .category-btn.active {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #28a745; /* Green for submit */
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+
+        /* --- Recent Feedback Display Styles --- */
+        .recent-feedback-section {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 30px;
+            margin-top: 40px;
+        }
+
+        .feedback-entry {
+            background-color: #f9f9f9;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .feedback-entry:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .feedback-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 0.9em;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 8px;
+        }
+
+        .feedback-meta span {
+            font-weight: 500;
+            color: #444;
+        }
+
+        .feedback-rating .feedback-star {
+            color: #e0e0e0; /* Default star color for display */
+            font-size: 1.1em;
+            margin-right: 2px;
+        }
+
+        .feedback-rating .feedback-star.selected {
+            color: #ffc107; /* Gold for selected stars in display */
+        }
+
+        .feedback-category {
+            font-size: 0.95em;
+            color: #007bff;
+            background-color: #e7f3ff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .feedback-comment {
+            font-size: 1em;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .no-feedback-message {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            padding: 20px;
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class="bx bxl-sketch icon"></i>
+            <div class="logo_name">FEU Tech</div>
+            <i class="bx bx-menu-alt-right" id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li><a href="dashboard.html"><i class="bx bx-grid-alt"></i><span class="links_name">Dashboard</span></a></li>
+            <li><a href="guidemap.html"><i class="bx bx-map-alt"></i><span class="links_name">Guide Map</span></a></li>
+            <li><a href="account.html"><i class="bx bx-user"></i><span class="links_name">Account</span></a></li>
+            <li><a href="feedback.html" class="active"><i class="bx bx-chat"></i><span class="links_name">Feedback</span></a></li>
+            <li><a href="about.html"><i class="bx bx-info-circle"></i><span class="links_name">About Us</span></a></li>
+            <li><a href="help.html"><i class="bx bx-help-circle"></i><span class="links_name">Help</span></a></li>
+            <li class="profile">
+            </li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="title-and-logo">
+                    <img src="images/logo.png" alt="FEU Tech Logo" class="header-logo" />
+                    <h2 class="page-title">User Feedback</h2>
+                </div>
+                <div class="user-profile">
+                    <a href="#" class="profile-link">
+                        <img src="images/profile.jpg" alt="User Avatar" class="user-avatar" />
+                        <span class="user-name">Jane Doe</span>
+                        <i class="bx bxs-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="user-info">
+                            <span class="user-initials">JD</span>
+                            <div class="user-details">
+                                <div class="user-name-dropdown">Jane Doe</div>
+                                <div class="user-email-dropdown">jane.doe@example.com</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li><a href="account.html"><i class="bx bx-user"></i>My Profile</a></li>
+                            <li><a href="settings.html"><i class="bx bx-cog"></i>Settings</a></li>
+                            <li><a href="notifications.html"><i class="bx bx-bell"></i>Notifications <span class="badge">3</span></a></li>
+                            <li><a href="login.html" class="logout"><i class="bx bx-log-out"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="feedback-container">
+            <div class="feedback-header">
+                <h3>We Value Your Feedback!</h3>
+                <p>Help us improve by sharing your thoughts and suggestions.</p>
+            </div>
+
+            <div class="feedback-form-section">
+                <h4>Submit New Feedback</h4>
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="commenterName">Your Name (Optional):</label>
+                        <input type="text" id="commenterName" name="commenterName" placeholder="e.g., John D. or Anonymous">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rating">Overall Rating:</label>
+                        <div class="star-rating" id="starRating">
+                            <span class="star" data-value="1"><i class="fas fa-star"></i></span>
+                            <span class="star" data-value="2"><i class="fas fa-star"></i></span>
+                            <span class="star" data-value="3"><i class="fas fa-star"></i></span>
+                            <span class="star" data-value="4"><i class="fas fa-star"></i></span>
+                            <span class="star" data-value="5"><i class="fas fa-star"></i></span>
+                        </div>
+                        <input type="hidden" id="selectedRating" name="rating" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <div class="category-buttons" id="categoryButtons">
+                            <button type="button" class="category-btn" data-category="Feature">Feature</button>
+                            <button type="button" class="category-btn" data-category="Navigation">Navigation</button>
+                            <button type="button" class="category-btn" data-category="Design">Design</button>
+                            <button type="button" class="category-btn" data-category="Performance">Performance</button>
+                            <button type="button" class="category-btn" data-category="Others">Others</button>
+                        </div>
+                        <input type="hidden" id="selectedCategory" name="category" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comment">Your Comment:</label>
+                        <textarea id="comment" name="comment" rows="5" placeholder="Please provide detailed feedback..."></textarea>
+                        <p class="small-text">Comments should be constructive and respectful.</p>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Feedback</button>
+                </form>
+            </div>
+
+            <div class="recent-feedback-section">
+                <h4>Recent Feedback</h4>
+                <div id="recentFeedbackList">
+                    <p class="no-feedback-message">No feedback submitted yet. Be the first!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.querySelector(".sidebar");
+            const closeBtn = document.querySelector("#btn");
+            const userProfile = document.querySelector(".user-profile");
+            const profileLink = document.querySelector(".profile-link");
+            const dropdownMenu = document.querySelector(".dropdown-menu");
+
+            // Sidebar Toggle Logic
+            if (sidebar && closeBtn) {
+                closeBtn.addEventListener("click", () => {
+                    sidebar.classList.toggle("open");
+                    document.querySelector('.home-section').classList.toggle('sidebar-open-adjusted');
+                });
+            }
+
+            // User Info Initialization
+            const userName = "Jane Doe"; // Example name
+            const userEmail = "jane.doe@example.com"; // Example email
+
+            const headerUserName = document.querySelector('.user-profile .user-name');
+            const dropdownUserName = document.querySelector('.dropdown-menu .user-name-dropdown');
+            const dropdownUserEmail = document.querySelector('.dropdown-menu .user-email-dropdown');
+            const dropdownUserInitials = document.querySelector('.dropdown-menu .user-initials');
+
+            if (headerUserName) headerUserName.textContent = userName;
+            if (dropdownUserName) dropdownUserName.textContent = userName;
+            if (dropdownUserEmail) dropdownUserEmail.textContent = userEmail;
+            if (dropdownUserInitials) dropdownUserInitials.textContent = getInitials(userName);
+
+            function getInitials(name) {
+                return name.split(' ').map(n => n[0]).join('').toUpperCase();
+            }
+
+            // Logout Functionality
+            const logoutBtnDropdown = document.querySelector('.dropdown-menu .logout');
+            const performLogout = (e) => {
+                e.preventDefault();
+                alert('Logging out...'); // Replace with actual logout logic if needed
+                window.location.href = 'login.html'; // Redirect to login page
+            };
+            if (logoutBtnDropdown) logoutBtnDropdown.addEventListener('click', performLogout);
+
+            // User Profile Dropdown Logic
+            if (profileLink && userProfile) {
+                profileLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    userProfile.classList.toggle('active');
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!userProfile.contains(event.target)) {
+                        userProfile.classList.remove('active');
+                    }
+                });
+            }
+
+            // Star Rating Logic
+            const starRatingContainer = document.getElementById('starRating');
+            const selectedRatingInput = document.getElementById('selectedRating');
+            let currentRating = 0;
+
+            if (starRatingContainer) {
+                const stars = starRatingContainer.querySelectorAll('.star');
+
+                const updateStars = (rating) => {
+                    stars.forEach(star => {
+                        const starValue = parseInt(star.dataset.value);
+                        if (starValue <= rating) {
+                            star.classList.add('selected');
+                        } else {
+                            star.classList.remove('selected');
+                        }
+                        star.classList.remove('hovered');
+                    });
+                };
+
+                updateStars(currentRating); // Initial render for stars based on currentRating (default 0)
+
+                stars.forEach(star => {
+                    star.addEventListener('click', function() {
+                        currentRating = parseInt(this.dataset.value);
+                        selectedRatingInput.value = currentRating;
+                        updateStars(currentRating);
+                    });
+
+                    star.addEventListener('mouseover', function() {
+                        const hoverRating = parseInt(this.dataset.value);
+                        stars.forEach(s => {
+                            const sValue = parseInt(s.dataset.value);
+                            if (sValue <= hoverRating) {
+                                s.classList.add('hovered');
+                            } else {
+                                s.classList.remove('hovered');
+                            }
+                        });
+                    });
+
+                    star.addEventListener('mouseout', function() {
+                        updateStars(currentRating);
+                    });
+                });
+            }
+
+            // Category Buttons Logic
+            const categoryButtonsContainer = document.getElementById('categoryButtons');
+            const selectedCategoryInput = document.getElementById('selectedCategory');
+
+            if (categoryButtonsContainer) {
+                categoryButtonsContainer.addEventListener('click', function(event) {
+                    if (event.target.classList.contains('category-btn')) {
+                        categoryButtonsContainer.querySelectorAll('.category-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        event.target.classList.add('active');
+                        selectedCategoryInput.value = event.target.dataset.category;
+                    }
+                });
+            }
+
+            // Handle Feedback Submission and Display (using localStorage)
+            const feedbackForm = document.getElementById('feedbackForm');
+            const recentFeedbackList = document.getElementById('recentFeedbackList');
+            const MAX_FEEDBACK_ENTRIES = 3; // Define the maximum number of entries to show
+
+            // Load feedback from localStorage or initialize empty array
+            let feedbackData = JSON.parse(localStorage.getItem('feedbackData')) || [];
+
+            // Function to render feedback entries
+            const renderFeedback = () => {
+                if (feedbackData.length === 0) {
+                    recentFeedbackList.innerHTML = '<p class="no-feedback-message">No feedback submitted yet. Be the first!</p>';
+                    return;
+                }
+
+                recentFeedbackList.innerHTML = ''; // Clear existing entries
+
+                // Slice to get only the latest MAX_FEEDBACK_ENTRIES, then reverse to show newest first
+                feedbackData.slice(Math.max(feedbackData.length - MAX_FEEDBACK_ENTRIES, 0)).reverse().forEach(entry => {
+                    const feedbackEntryDiv = document.createElement('div');
+                    feedbackEntryDiv.classList.add('feedback-entry');
+
+                    const displayStarsHtml = `<span class="feedback-rating">` +
+                                             Array(5).fill().map((_, i) =>
+                                                 `<i class="fas fa-star feedback-star${i < entry.rating ? ' selected' : ''}"></i>`
+                                             ).join('') +
+                                             `</span>`;
+
+                    feedbackEntryDiv.innerHTML = `
+                        <div class="feedback-meta">
+                            <span>${entry.commenterName ? entry.commenterName : 'Anonymous'} on ${entry.date}</span>
+                            ${displayStarsHtml}
+                        </div>
+                        <div class="feedback-category">Category: ${entry.category || 'N/A'}</div>
+                        <div class="feedback-comment">${entry.comment}</div>
+                    `;
+                    recentFeedbackList.appendChild(feedbackEntryDiv);
+                });
+            };
+
+            // Event listener for form submission
+            if (feedbackForm) {
+                feedbackForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const commenterName = document.getElementById('commenterName').value.trim();
+                    const rating = parseInt(selectedRatingInput.value);
+                    const category = selectedCategoryInput.value;
+                    const comment = document.getElementById('comment').value.trim();
+
+                    if (rating === 0 || !category || !comment) {
+                        alert('Please provide a rating, select a category, and enter your comment before submitting.');
+                        return;
+                    }
+
+                    const newFeedback = {
+                        commenterName: commenterName,
+                        rating: rating,
+                        category: category,
+                        comment: comment,
+                        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+                    };
+
+                    feedbackData.push(newFeedback); // Add new feedback to the array
+
+                    // *** NEW LOGIC: Limit feedback data to MAX_FEEDBACK_ENTRIES ***
+                    if (feedbackData.length > MAX_FEEDBACK_ENTRIES) {
+                        feedbackData = feedbackData.slice(feedbackData.length - MAX_FEEDBACK_ENTRIES); // Keep only the newest entries
+                    }
+                    // ***************************************************************
+
+                    localStorage.setItem('feedbackData', JSON.stringify(feedbackData)); // Save updated array to localStorage
+
+                    // Clear form after submission
+                    feedbackForm.reset();
+                    currentRating = 0;
+                    selectedRatingInput.value = "0";
+                    selectedCategoryInput.value = "";
+                    updateStars(0);
+                    categoryButtonsContainer.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+
+                    renderFeedback(); // Re-render the feedback list to show the new entry (with limit)
+                    alert('Thank you for your feedback!');
+                });
+            }
+
+            // Initial render of feedback when the page loads
+            renderFeedback();
+        });
+    </script>
+</body>
+</html>

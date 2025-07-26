@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | FEU Tech Campus Navigation</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-sketch icon'></i>
+      <div class="logo_name">FEU Tech</div>
+      <i class='bx bx-menu-alt-right' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+      <li><a href="dashboard.html"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
+      <li><a href="guidemap.html"><i class='bx bx-map-alt'></i><span class="links_name">Guide Map</span></a></li>
+      <li><a href="account.html"><i class='bx bx-user'></i><span class="links_name">Account</span></a></li>
+      <li><a href="feedback.html"><i class='bx bx-chat'></i><span class="links_name">Feedback</span></a></li>
+      <li><a href="about.html" class="active"><i class='bx bx-info-circle'></i><span class="links_name">About Us</span></a></li>
+      <li><a href="help.html"><i class='bx bx-help-circle'></i><span class="links_name">Help</span></a></li>
+      <li class="profile">
+      </li>
+    </ul>
+  </div>
+
+  <section class="home-section">
+    <header class="main-header">
+      <div class="header-content">
+        <div class="title-and-logo">
+          <img src="images/logo.png" alt="FEU Tech Logo" class="header-logo">
+          <h2 class="page-title">About Us</h2>
+        </div>
+        <div class="user-profile">
+          <a href="#" class="profile-link">
+            <img src="images/profile.jpg" alt="User Avatar" class="user-avatar">
+            <span class="user-name">Jane Doe</span>
+            <i class='bx bxs-chevron-down dropdown-icon'></i>
+          </a>
+          <div class="dropdown-menu">
+            <div class="user-info">
+              <span class="user-initials">JD</span>
+              <div class="user-details">
+                <div class="user-name-dropdown">Jane Doe</div>
+                <div class="user-email-dropdown">jane.doe@example.com</div>
+              </div>
+            </div>
+            <ul>
+              <li><a href="account.html"><i class='bx bx-user'></i>My Profile</a></li>
+              <li><a href="settings.html"><i class='bx bx-cog'></i>Settings</a></li> <!-- ✅ Linked -->
+              <li><a href="notifications.html"><i class='bx bx-bell'></i>Notifications <span class="badge">3</span></a></li> <!-- ✅ Linked -->
+              <li><a href="login.html" class="logout"><i class='bx bx-log-out'></i>Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="about-container">
+      <div class="about-header">
+        <div class="content">
+          <img src="images/logo.png" alt="FEU Tech Logo">
+          <h3>About FEU Tech Campus Navigation</h3>
+          <p>Your guide to seamless navigation within FEU Tech campus.</p>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h4>Our Story</h4>
+        <p>FEU Tech Campus Navigation was developed to address the common challenge students, faculty, and visitors face in navigating the intricate layout of the FEU Institute of Technology campus. Our team, passionate about technology and user experience, set out to create an intuitive and comprehensive web-based mapping solution that simplifies finding classrooms, offices, and facilities.</p>
+        <p>Since its inception, we've continuously refined the system, incorporating user feedback to ensure it remains a reliable and essential tool for everyone on campus. We believe that easy access to information fosters a more productive and less stressful academic environment.</p>
+      </div>
+
+      <div class="mission-vision-grid">
+        <div class="mission-vision-card green-card">
+          <h5>Our Mission</h5>
+          <p>To provide an accurate, user-friendly, and comprehensive digital navigation system that enhances accessibility and convenience for everyone within the FEU Tech campus.</p>
+        </div>
+        <div class="mission-vision-card">
+          <h5>Our Vision</h5>
+          <p>To become the leading campus navigation platform, revolutionizing the way students, faculty, and visitors interact with and explore educational institutions globally.</p>
+        </div>
+      </div>
+
+      <div class="key-features-section">
+        <h4>Key Features</h4>
+        <div class="features-grid">
+          <div class="feature-item">
+            <i class='bx bx-map-pin'></i>
+            <h5>Precise Room Locating</h5>
+            <p>Find any classroom, office, or facility with pinpoint accuracy on our interactive maps.</p>
+          </div>
+          <div class="feature-item">
+            <i class='bx bx-building'></i>
+            <h5>Multi-Building Support</h5>
+            <p>Seamlessly switch between different campus buildings and floor levels.</p>
+          </div>
+          <div class="feature-item">
+            <i class='bx bx-history'></i>
+            <h5>Recent Searches</h5>
+            <p>Quickly access your previously viewed locations for recurring needs.</p>
+          </div>
+          <div class="feature-item">
+            <i class='bx bx-bulb'></i>
+            <h5>Smart Pathfinding</h5>
+            <p>Get optimized routes to your destination within the campus.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-section">
+        <h4>Our Team</h4>
+        <div class="team-grid">
+          <div class="team-member">
+            <img src="images/profile.jpg" alt="Team Member 1">
+            <h5>Matt Petras</h5>
+            <p>Project Leader</p>
+          </div>
+          <div class="team-member">
+            <img src="images/profile2.jpg" alt="Team Member 2">
+            <h5>Amiel Dizon</h5>
+            <p>Lead Developer</p>
+          </div>
+          <div class="team-member">
+            <img src="images/profile3.jpg" alt="Team Member 3">
+            <h5>Craig Ongcoy</h5>
+            <p>UI/UX Designer</p>
+          </div>
+          <div class="team-member">
+            <img src="images/profile4.png" alt="Team Member 4">
+            <h5>Jericho Rosero</h5>
+            <p>Content Creator</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userName = "Jane Doe";
+      const userEmail = "jane.doe@example.com";
+      const userRole = "Student";
+
+      const sidebarName = document.querySelector('.sidebar .profile .name');
+      const sidebarJob = document.querySelector('.sidebar .profile .job');
+      if (sidebarName) sidebarName.textContent = userName;
+      if (sidebarJob) sidebarJob.textContent = userRole;
+
+      const headerUserName = document.querySelector('.user-profile .user-name');
+      const dropdownUserName = document.querySelector('.dropdown-menu .user-name-dropdown');
+      const dropdownUserEmail = document.querySelector('.dropdown-menu .user-email-dropdown');
+      const dropdownUserInitials = document.querySelector('.dropdown-menu .user-initials');
+
+      if (headerUserName) headerUserName.textContent = userName;
+      if (dropdownUserName) dropdownUserName.textContent = userName;
+      if (dropdownUserEmail) dropdownUserEmail.textContent = userEmail;
+      if (dropdownUserInitials) dropdownUserInitials.textContent = getInitials(userName);
+
+      const logoutBtnSidebar = document.getElementById('log_out');
+      const logoutBtnDropdown = document.querySelector('.dropdown-menu .logout');
+      const performLogout = (e) => {
+        e.preventDefault();
+        alert('Logging out...');
+        window.location.href = 'login.html';
+      };
+      if (logoutBtnSidebar) logoutBtnSidebar.addEventListener('click', performLogout);
+      if (logoutBtnDropdown) logoutBtnDropdown.addEventListener('click', performLogout);
+    });
+
+    function getInitials(name) {
+      return name
+        .split(' ')
+        .map(n => n[0])
+        .join('')
+        .toUpperCase();
+    }
+  </script>
+</body>
+</html>

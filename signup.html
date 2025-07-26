@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up | FEU Tech Campus Navigation</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body.signup-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f4f9f4;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .signup-container {
+      background: #ffffff;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .signup-container img.logo {
+      max-width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .signup-container h2 {
+      margin-bottom: 10px;
+      color: #2d3436;
+    }
+
+    .signup-container p.subtitle {
+      color: #636e72;
+      font-size: 0.95em;
+      margin-bottom: 25px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 0.9em;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px 12px 10px 40px; /* left padding for icon */
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+
+    .input-group i.icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #27ae60;
+      font-size: 1.2em;
+    }
+
+    .signup-button {
+      width: 100%;
+      padding: 12px;
+      background-color: #27ae60;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .signup-button:hover {
+      background-color: #219150;
+    }
+
+    .login-link {
+      margin-top: 15px;
+      font-size: 0.9em;
+    }
+
+    .login-link a {
+      color: #27ae60;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="signup-page">
+
+  <div class="signup-container">
+    <img src="images/logo.png" alt="FEU Tech Logo" class="logo">
+    <h2>Create Your Account</h2>
+    <p class="subtitle">Sign up to navigate the FEU Tech campus like a pro</p>
+
+    <form id="signupForm">
+      <div class="input-group">
+        <label for="fullname">Full Name</label>
+        <i class='bx bx-user icon'></i>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email</label>
+        <i class='bx bx-envelope icon'></i>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <i class='bx bx-lock-alt icon'></i>
+        <input type="password" id="password" name="password" placeholder="Create a password" required>
+      </div>
+
+      <button type="submit" class="signup-button">Sign Up</button>
+
+      <p class="login-link">Already have an account? <a href="login.html">Log in</a></p>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      if (name && email) {
+        alert(`Signup successful! Welcome, ${name}.`);
+        window.location.href = 'login.html';
+      } else {
+        alert('Please fill in all fields.');
+      }
+    });
+  </script>
+
+</body>
+</html>

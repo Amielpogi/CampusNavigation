@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to FEU Tech Campus Navigation</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .main-header {
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+    }
+
+    .title-and-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .header-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .home-section {
+      padding: 40px;
+    }
+
+    .landing-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .landing-logo {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    .cta-buttons {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .get-started-btn,
+    .login-now-btn {
+      padding: 12px 24px;
+      background-color: #0984e3;
+      color: #fff;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 15px;
+      text-transform: uppercase;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+
+    .get-started-btn:hover,
+    .login-now-btn:hover {
+      background-color: #0652dd;
+    }
+
+    .landing-features {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 60px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .feature-card {
+      flex: 1;
+      min-width: 250px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .feature-card i {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #0984e3;
+    }
+
+    .about-app-section {
+      margin-top: 60px;
+      padding: 20px;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-content">
+      <div class="title-and-logo">
+        <img src="images/logo.png" alt="FEU Tech Logo" class="header-logo" onerror="this.onerror=null;this.src='https://via.placeholder.com/40'" />
+        <h1>FEU TECH CAMPUS NAVIGATION</h1>
+      </div>
+      <a href="login.html" class="loginnn">Login</a>
+    </div>
+  </header>
+
+  <section class="home-section landing-page">
+    <div class="landing-content">
+      <img src="images/logo.png" alt="FEU Tech Logo" class="landing-logo" />
+      <h2>Welcome to FEU Tech</h2>
+      <p>Navigate our campus with ease using our immersive web-based solution</p>
+
+      <div class="cta-buttons">
+        <a href="dashboard.html" class="get-started-btn">Get Started</a>
+        <a href="login.html" class="login-now-btn">Login Now</a>
+      </div>
+
+      <div class="landing-features">
+        <div class="feature-card">
+          <i class='bx bx-map-alt'></i>
+          <h4>Interactive 2D Maps</h4>
+          <p>Explore detailed floor plans of all campus buildings with room-by-room navigation</p>
+        </div>
+        <div class="feature-card">
+          <i class='bx bx-group'></i>
+          <h4>Multi-User Access</h4>
+          <p>Designed for students, faculty, staff, and visitors with personalized features</p>
+        </div>
+        <div class="feature-card">
+          <i class='bx bx-chat'></i>
+          <h4>Feedback System</h4>
+          <p>Help us improve the navigation experience with your valuable feedback</p>
+        </div>
+      </div>
+
+      <div class="about-app-section">
+        <h3>About FEU Tech Campus Navigation</h3>
+        <p>Our innovative web-based solution enhances the campus experience at FEU Tech in Manila, Philippines. We address the ongoing challenge of navigating the university's complex layout, which includes multiple buildings, interconnected floors, and various departments.</p>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

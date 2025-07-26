@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Settings | FEU Tech Campus Navigation</title>
+  <link rel="stylesheet" href="style.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-sketch icon'></i>
+      <div class="logo_name">FEU Tech</div>
+      <i class='bx bx-menu-alt-right' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+      <li><a href="dashboard.html"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
+      <li><a href="guidemap.html"><i class='bx bx-map-alt'></i><span class="links_name">Guide Map</span></a></li>
+      <li><a href="account.html" class="active"><i class='bx bx-user'></i><span class="links_name">Account</span></a></li>
+      <li><a href="feedback.html"><i class='bx bx-chat'></i><span class="links_name">Feedback</span></a></li>
+      <li><a href="about.html"><i class='bx bx-info-circle'></i><span class="links_name">About Us</span></a></li>
+      <li><a href="help.html"><i class='bx bx-help-circle'></i><span class="links_name">Help</span></a></li>
+      <li class="profile">
+      </li>
+    </ul>
+  </div>
+
+  <section class="home-section">
+    <header class="main-header">
+      <div class="header-content">
+        <div class="title-and-logo">
+          <img src="images/logo.png" alt="FEU Tech Logo" class="header-logo">
+          <h2 class="page-title">Account Settings</h2>
+        </div>
+        <div class="user-profile">
+          <a href="#" class="profile-link">
+            <img src="images/profile.jpg" alt="User Avatar" class="user-avatar">
+            <span class="user-name">Jane Doe</span>
+            <i class='bx bxs-chevron-down dropdown-icon'></i>
+          </a>
+          <div class="dropdown-menu">
+            <div class="user-info">
+              <span class="user-initials">JD</span>
+              <div class="user-details">
+                <div class="user-name-dropdown">Jane Doe</div>
+                <div class="user-email-dropdown">jane.doe@example.com</div>
+              </div>
+            </div>
+            <ul>
+              <li><a href="account.html"><i class='bx bx-user'></i>My Profile</a></li>
+              <li><a href="settings.html"><i class='bx bx-cog'></i>Settings</a></li> <!-- ✅ Connected -->
+              <li><a href="notifications.html"><i class='bx bx-bell'></i>Notifications <span class="badge">3</span></a></li> <!-- ✅ Connected -->
+              <li><a href="login.html" class="logout"><i class='bx bx-log-out'></i>Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="account-container">
+      <div class="profile-section">
+        <div class="profile-avatar">JD</div>
+        <h3 class="user-name-display">Jane Doe</h3>
+        <p class="user-email-display">jane.doe@example.com</p>
+        <p class="user-role-display">Student, Bachelor of Science in Information Technology</p>
+        <button class="edit-profile-btn">Edit Profile</button>
+      </div>
+
+      <div class="account-details-section">
+        <div class="detail-card">
+          <h4><i class='bx bx-user'></i>Personal Information</h4>
+          <ul>
+            <li><span>Full Name:</span> <span>Jane Doe</span></li>
+            <li><span>Student ID:</span> <span>2022-12052</span></li>
+            <li><span>Date of Birth:</span> <span>January 1, 2004</span></li>
+            <li><span>Contact Number:</span> <span>+63 9XX XXX XXXX</span></li>
+            <li><span>Address:</span> <span>Sample St., Quezon City</span></li>
+          </ul>
+        </div>
+
+        <div class="detail-card">
+          <h4><i class='bx bx-cog'></i>Account Settings</h4>
+          <ul>
+            <li><span>Change Password:</span> <a href="#">Click Here</a></li>
+            <li><span>Email Notifications:</span>
+              <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+              </label>
+            </li>
+            <li><span>Dark Mode:</span>
+              <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider round"></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="detail-card">
+          <h4><i class='bx bx-building'></i>Academic Information</h4>
+          <ul>
+            <li><span>Course:</span> <span>BS Information Technology</span></li>
+            <li><span>Year Level:</span> <span>3rd Year</span></li>
+            <li><span>Department:</span> <span>Department of Computer Studies</span></li>
+            <li><span>Enrollment Status:</span> <span>Enrolled</span></li>
+          </ul>
+        </div>
+
+        <div class="detail-card">
+          <h4><i class='bx bx-shield-alt-2'></i>Security</h4>
+          <ul>
+            <li><span>Two-Factor Authentication:</span>
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </li>
+            <li><span>Last Login:</span> <span>2025-07-10 10:00 AM</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userName = "Jane Doe";
+      const userEmail = "jane.doe@example.com";
+      const userRole = "Student";
+
+      const sidebarName = document.querySelector('.sidebar .profile .name');
+      const sidebarJob = document.querySelector('.sidebar .profile .job');
+      if (sidebarName) sidebarName.textContent = userName;
+      if (sidebarJob) sidebarJob.textContent = userRole;
+
+      const headerUserName = document.querySelector('.user-profile .user-name');
+      const dropdownUserName = document.querySelector('.dropdown-menu .user-name-dropdown');
+      const dropdownUserEmail = document.querySelector('.dropdown-menu .user-email-dropdown');
+      const dropdownUserInitials = document.querySelector('.dropdown-menu .user-initials');
+
+      if (headerUserName) headerUserName.textContent = userName;
+      if (dropdownUserName) dropdownUserName.textContent = userName;
+      if (dropdownUserEmail) dropdownUserEmail.textContent = userEmail;
+      if (dropdownUserInitials) dropdownUserInitials.textContent = getInitials(userName);
+
+      const profileAvatar = document.querySelector('.profile-avatar');
+      const profileNameDisplay = document.querySelector('.user-name-display');
+      const profileEmailDisplay = document.querySelector('.user-email-display');
+      const profileRoleDisplay = document.querySelector('.user-role-display');
+
+      if (profileAvatar) profileAvatar.textContent = getInitials(userName);
+      if (profileNameDisplay) profileNameDisplay.textContent = userName;
+      if (profileEmailDisplay) profileEmailDisplay.textContent = userEmail;
+      if (profileRoleDisplay) profileRoleDisplay.textContent = `${userRole}, Bachelor of Science in Information Technology`;
+
+      const logoutBtnSidebar = document.getElementById('log_out');
+      const logoutBtnDropdown = document.querySelector('.dropdown-menu .logout');
+      const performLogout = (e) => {
+        e.preventDefault();
+        alert('Logging out...');
+        window.location.href = 'login.html';
+      };
+      if (logoutBtnSidebar) logoutBtnSidebar.addEventListener('click', performLogout);
+      if (logoutBtnDropdown) logoutBtnDropdown.addEventListener('click', performLogout);
+
+      const checkbox = document.getElementById('darkModeToggle');
+      const isDark = localStorage.getItem('dark-mode') === 'true';
+      if (isDark) {
+        document.body.classList.add('dark-mode');
+        checkbox.checked = true;
+      }
+
+      checkbox.addEventListener('change', () => {
+        document.body.classList.toggle('dark-mode', checkbox.checked);
+        localStorage.setItem('dark-mode', checkbox.checked);
+      });
+    });
+
+    function getInitials(name) {
+      return name
+        .split(' ')
+        .map(n => n[0])
+        .join('')
+        .toUpperCase();
+    }
+  </script>
+</body>
+</html>

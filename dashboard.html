@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | FEU Tech Campus Navigation</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class="bx bxl-sketch icon"></i>
+            <div class="logo_name">FEU Tech</div>
+            <i class="bx bx-menu-alt-right" id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li><a href="dashboard.html" class="active"><i class="bx bx-grid-alt"></i><span class="links_name">Dashboard</span></a></li>
+            <li><a href="guidemap.html"><i class="bx bx-map-alt"></i><span class="links_name">Guide Map</span></a></li>
+            <li><a href="account.html"><i class="bx bx-user"></i><span class="links_name">Account</span></a></li>
+            <li><a href="feedback.html"><i class="bx bx-chat"></i><span class="links_name">Feedback</span></a></li>
+            <li><a href="about.html"><i class="bx bx-info-circle"></i><span class="links_name">About Us</span></a></li>
+            <li><a href="help.html"><i class="bx bx-help-circle"></i><span class="links_name">Help</span></a></li>
+            <li class="profile">
+            </li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="title-and-logo">
+                    <img src="images/logo.png" alt="FEU Tech Logo" class="header-logo" />
+                    <h2 class="page-title">Dashboard</h2>
+                </div>
+                <div class="user-profile">
+                    <a href="#" class="profile-link">
+                        <img src="images/profile.jpg" alt="User Avatar" class="user-avatar" />
+                        <span class="user-name">Jane Doe</span>
+                        <i class="bx bxs-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="user-info">
+                            <span class="user-initials">JD</span>
+                            <div class="user-details">
+                                <div class="user-name-dropdown">Jane Doe</div>
+                                <div class="user-email-dropdown">jane.doe@example.com</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li><a href="account.html"><i class="bx bx-user"></i>My Profile</a></li>
+                            <li><a href="settings.html"><i class="bx bx-cog"></i>Settings</a></li>
+                            <li><a href="notifications.html"><i class="bx bx-bell"></i>Notifications <span class="badge">3</span></a></li>
+                            <li><a href="login.html" class="logout"><i class="bx bx-log-out"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content" id="dashboardContentArea">
+            <div class="welcome-box">
+                <h3>Welcome, Jane Doe!</h3>
+                <p>Explore FEU Tech campus with ease. Your journey starts here.</p>
+            </div>
+
+            <div class="card-container">
+                <a href="guidemap.html" class="card">
+                    <i class="bx bx-map-alt icon"></i>
+                    <h4>Campus Guide Map</h4>
+                    <p>Find your way around buildings and rooms.</p>
+                </a>
+                <a href="#" class="card" data-target="events">
+                    <i class="bx bx-calendar-event icon"></i>
+                    <h4>Upcoming Events</h4>
+                    <p>Stay updated on campus activities.</p>
+                </a>
+                <a href="#" class="card" data-target="buildings">
+                    <i class="bx bx-building icon"></i>
+                    <h4>Building Information</h4>
+                    <p>Learn more about campus facilities.</p>
+                </a>
+            </div>
+
+            <div class="recent-activity">
+                <h3>Recent Activity</h3>
+                <ul>
+                    <li><span>Navigated to C101</span><span>Today, 10:30 AM</span></li>
+                    <li><span>Viewed Campus Map</span><span>Yesterday, 2:15 PM</span></li>
+                    <li><span>Checked profile settings</span><span>3 days ago, 9:00 AM</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="dynamic-content-area" class="dynamic-content-area hidden">
+            </div>
+
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Existing User Data and Profile Logic ---
+            const userName = "Jane Doe";
+            const userEmail = "jane.doe@example.com";
+            const userRole = "Student";
+
+            const sidebarName = document.querySelector('.sidebar .profile .name');
+            const sidebarJob = document.querySelector('.sidebar .profile .job');
+            if (sidebarName) sidebarName.textContent = userName;
+            if (sidebarJob) sidebarJob.textContent = userRole;
+
+            const headerUserName = document.querySelector('.user-profile .user-name');
+            const dropdownUserName = document.querySelector('.user-name-dropdown');
+            const dropdownUserEmail = document.querySelector('.user-email-dropdown');
+            const dropdownUserInitials = document.querySelector('.user-initials');
+
+            if (headerUserName) headerUserName.textContent = userName;
+            if (dropdownUserName) dropdownUserName.textContent = userName;
+            if (dropdownUserEmail) dropdownUserEmail.textContent = userEmail;
+            if (dropdownUserInitials) dropdownUserInitials.textContent = getInitials(userName);
+
+            const logoutBtnSidebar = document.getElementById('log_out');
+            const logoutBtnDropdown = document.querySelector('.logout');
+
+            const performLogout = (e) => {
+                e.preventDefault();
+                alert('Logging out...');
+                window.location.href = 'login.html'; // Redirect to login page
+            };
+
+            if (logoutBtnSidebar) logoutBtnSidebar.addEventListener('click', performLogout);
+            if (logoutBtnDropdown) logoutBtnDropdown.addEventListener('click', performLogout);
+
+            function getInitials(name) {
+                return name
+                    .split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .toUpperCase();
+            }
+
+            // --- MODIFIED JAVASCRIPT FOR DASHBOARD CARD CLICKS AND DYNAMIC CONTENT ---
+            // Only select cards with data-target, as the map card now navigates directly
+            const dynamicDashboardCards = document.querySelectorAll('.card-container .card[data-target]');
+            const dashboardContentArea = document.getElementById('dashboardContentArea');
+            const dynamicContentArea = document.getElementById('dynamic-content-area');
+            const pageTitle = document.querySelector('.page-title'); // Get the main header title element
+
+            dynamicDashboardCards.forEach(card => {
+                card.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default link behavior for these cards
+                    const target = this.dataset.target; // Get the value of data-target (events, buildings)
+
+                    // Optional: Add a class for a fading out effect on current content
+                    dashboardContentArea.classList.add('fade-out');
+
+                    // After a short delay to allow fade-out, load new content
+                    setTimeout(() => {
+                        loadContent(target); // Load the new content HTML
+                        dashboardContentArea.classList.add('hidden'); // Hide the main dashboard content
+                        dynamicContentArea.classList.remove('hidden'); // Show the dynamic content area
+                        dynamicContentArea.classList.add('fade-in'); // Add fade-in effect to the new content
+
+                        // Update the header title based on the clicked card
+                        let newTitle = "Dashboard"; // Default title
+                        if (target === "events") {
+                            newTitle = "Upcoming Events";
+                        } else if (target === "buildings") {
+                            newTitle = "Building Information";
+                        }
+                        pageTitle.textContent = newTitle; // Update the actual h2 title in the header
+
+                        dashboardContentArea.classList.remove('fade-out'); // Remove fade-out class after transition
+                    }, 300); // This delay should match your CSS transition duration for opacity
+                });
+            });
+
+            // Function to load content based on the target (events, buildings)
+            function loadContent(target) {
+                let content = ''; // Variable to hold the HTML content for each section
+                switch (target) {
+                    // Removed 'maps' case as it now navigates directly
+                    case 'events':
+                        content = `
+                            <div class="content-header">
+                                <h2>Upcoming Events at FEU Tech</h2>
+                                <p>Stay updated on the latest campus activities, webinars, and special gatherings.</p>
+                            </div>
+                            <div class="events-list">
+                                <div class="event-item">
+                                    <h4>Annual IT Congress 2025</h4>
+                                    <p><strong>Date:</strong> August 15-17, 2025</p>
+                                    <p><strong>Time:</strong> 9:00 AM - 5:00 PM</p>
+                                    <p><strong>Location:</strong> Multi-Purpose Hall & Online (Hybrid Event)</p>
+                                    <p>Join us for three days of insightful talks, workshops, and project showcases from leading tech professionals and students.</p>
+                                </div>
+                                <div class="event-item">
+                                    <h4>Freshmen Orientation & Welcome Assembly</h4>
+                                    <p><strong>Date:</strong> July 28-29, 2025</p>
+                                    <p><strong>Time:</strong> 8:00 AM - 12:00 PM</p>
+                                    <p><strong>Location:</strong> FEU Tech Auditorium & Campus Grounds</p>
+                                    <p>A comprehensive orientation for all new students, introducing them to campus life, services, and academic programs.</p>
+                                </div>
+                                <div class="event-item">
+                                    <h4>FEU Tech Career Fair</h4>
+                                    <p><strong>Date:</strong> September 5, 2025</p>
+                                    <p><strong>Time:</strong> 10:00 AM - 4:00 PM</p>
+                                    <p><strong>Location:</strong> Gym and Open Field</p>
+                                    <p>Connect with top companies for internship and job opportunities. Bring your resume!</p>
+                                </div>
+                                <div class="event-item">
+                                    <h4>Hackathon 2025: Innovate for a Sustainable Future</h4>
+                                    <p><strong>Date:</strong> October 25-26, 2025</p>
+                                    <p><strong>Location:</strong> Innovation Center Labs</p>
+                                    <p>A 24-hour coding challenge focused on developing solutions for environmental sustainability. Prizes await the winners!</p>
+                                </div>
+                            </div>
+                            <button id="backToDashboard" class="back-button">Back to Dashboard</button>
+                        `;
+                        break;
+                    case 'buildings':
+                        content = `
+                            <div class="content-header">
+                                <h2>FEU Tech Campus Building Information</h2>
+                                <p>Learn more about the various buildings and facilities within the FEU Tech campus.</p>
+                            </div>
+                            <div class="building-list">
+                                <div class="building-item">
+                                    <h4>Main Building (N-Building)</h4>
+                                    <p>The primary academic and administrative hub of FEU Tech. It houses a majority of the classrooms, computer laboratories, and essential student services.</p>
+                                    <ul>
+                                        <li><strong>Floors:</strong> 4-15th Floors</li>
+                                        <li><strong>Key Facilities:</strong> Library, Registrar's Office, Accounting Office, Dean's Offices, Canteen</li>
+                                    </ul>
+                                </div>
+                                <div class="building-item">
+                                    <h4>Innovation Center (IC-Building)</h4>
+                                    <p>A state-of-the-art facility dedicated to research, development, and technological innovation. It hosts specialized laboratories and collaborative spaces.</p>
+                                    <ul>
+                                        <li><strong>Floors:</strong> 15th Floor</li>
+                                        <li><strong>Key Facilities:</strong> Computer Labs and Faculty Research Offices</li>
+                                    </ul>
+                                </div>
+                                <div class="building-item">
+                                    <h4>Student Plaza (SP-Area)</h4>
+                                    <p>An open-air multi-purpose area designed for student recreation, events, and gatherings. It's a central point for campus social life.</p>
+                                    <ul>
+                                        <li><strong>Floors:</strong> 2nd Floor</li>
+                                        <li><strong>Key Facilities:</strong> Event Stalls, Student Organization Booths, Lounge Areas</li>
+                                    </ul>
+                                </div>
+                                <div class="building-item">
+                                    <h4>Gymnasium (Gym)</h4>
+                                    <p>The primary athletic facility on campus, used for sports activities, physical education classes, and large-scale university events.</p>
+                                    <ul>
+                                        <li><strong>Floors:</strong> 3rd and 16th Floor</li>
+                                        <li><strong>Key Facilities:</strong> Basketball Court (16F), Volleyball Court (16F), Locker Rooms, Swimming Pool (3F)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <button id="backToDashboard" class="back-button">Back to Dashboard</button>
+                        `;
+                        break;
+                    default:
+                        // This case handles unexpected targets or can be used for an initial welcome message
+                        content = `
+                            <div class="content-header">
+                                <h2>Welcome to the Dynamic Content Area!</h2>
+                                <p>Click on "Upcoming Events" or "Building Information" to view details.</p>
+                            </div>
+                        `;
+                }
+                dynamicContentArea.innerHTML = content; // Insert the generated HTML into the dynamic content area
+
+                // Add event listener for the 'Back to Dashboard' button AFTER the content is loaded
+                const backButton = document.getElementById('backToDashboard');
+                if (backButton) {
+                    backButton.addEventListener('click', () => {
+                        dynamicContentArea.classList.add('fade-out'); // Fade out the dynamic content
+
+                        setTimeout(() => {
+                            dynamicContentArea.classList.add('hidden'); // Hide dynamic content fully
+                            dynamicContentArea.classList.remove('fade-in', 'fade-out'); // Clean up fade classes
+                            dashboardContentArea.classList.remove('hidden'); // Show the original dashboard content
+                            dashboardContentArea.classList.add('fade-in'); // Fade in the dashboard content
+                            pageTitle.textContent = "Dashboard"; // Reset title back to "Dashboard"
+                        }, 300); // Match CSS transition duration
+                    });
+                }
+            }
+            // --- END NEW JAVASCRIPT ---
+
+            // Ensure initial state: dashboard is visible and dynamic content is hidden
+            dashboardContentArea.classList.remove('hidden');
+            dynamicContentArea.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
